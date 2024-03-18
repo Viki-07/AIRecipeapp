@@ -14,7 +14,7 @@ We can apply filters based on
   - Lactose Free
   - Vegan
   - Vegetarian
-![Screenshot_2024-03-18-18-29-27-246_com example mealapp](https://github.com/Viki-07/Recipeapp/assets/96718201/f2fdfaca-ef1b-4d4d-b016-00ae176d643e)
+
 
 
 -This App uses Material 3 Android Design.<br>

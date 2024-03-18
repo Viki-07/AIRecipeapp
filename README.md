@@ -1,4 +1,4 @@
-# A Recipe App
+# AI Recipe App
 
 A Recipe App based on Flutter & Dart that has many Recipes with detailed steps and ingredients required.
 

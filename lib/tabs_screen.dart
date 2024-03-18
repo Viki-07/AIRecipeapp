@@ -5,7 +5,8 @@ import 'package:mealapp/category_screen.dart';
 import 'package:mealapp/favourites_screen.dart';
 import 'package:mealapp/main_drawer.dart';
 import 'package:mealapp/models/meal.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import './provider/favourite_mealprovider.dart';
 class TabsScreen extends StatefulWidget {
   final List<Meal> favoriteMeal;
   const TabsScreen({super.key, required this.favoriteMeal});
@@ -15,22 +16,26 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  
- late List<Map<String, dynamic>> pages;
+  late List<Map<String, dynamic>> pages;
   int selectedindex = 0;
   void selectPage(int index) {
     setState(() {
       selectedindex = index;
     });
   }
+
   @override
   void initState() {
-  pages = [
-    {'page': CategoryScreen(), 'title': 'Categories'},
-    {'page': FavouriteScreen(favMeal: widget.favoriteMeal), 'title': 'Favorites'},
-  ];
+    pages = [
+      {'page': CategoryScreen(), 'title': 'Categories'},
+      {
+        'page': FavouriteScreen(favMeal: widget.favoriteMeal),
+        'title': 'Favorites'
+      },
+    ];
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

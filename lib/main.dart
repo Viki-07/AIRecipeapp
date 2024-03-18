@@ -4,21 +4,22 @@ import 'package:mealapp/filter_screen.dart';
 import 'package:mealapp/meal_detail.dart';
 import 'package:mealapp/selected_category.dart';
 import 'package:mealapp/tabs_screen.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'models/meal.dart';
+import './provider/meal_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child:MyApp()));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  ConsumerState<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends ConsumerState<MyApp> {
   Map<String, bool> filters = {
     'gluten': false,
     'lactose': false,
@@ -49,7 +50,15 @@ class _MyAppState extends State<MyApp> {
   void setFilters(Map<String, bool> filterData) {
     setState(() {
       filters = filterData;
-      availMeal = DUMMY_MEALS.where((element) {
+      
+    });
+  }
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    final mealprov=ref.watch(mealProvider);
+   availMeal = mealprov.where((element) {
         if (filters['gluten']! && !element.isGlutenFree) {
           return false;
         }
@@ -64,12 +73,6 @@ class _MyAppState extends State<MyApp> {
         }
         return true;
       }).toList();
-    });
-  }
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Meal App',
       theme: ThemeData(
